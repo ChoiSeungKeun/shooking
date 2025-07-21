@@ -1,0 +1,33 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+html,
+body {
+  margin: 0px;
+  width: 100%;
+  background-color: rgb(245, 245, 245);
+}
+
+#root {
+  background-color: white;
+  max-width: 100%;
+  width: 430px;
+  min-height: 100vh;
+  height: 100%;
+  margin: 0 auto;
+}
+
+body * {
+  font-family: "Montserrat";
+}
