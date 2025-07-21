@@ -1,0 +1,41 @@
+.Button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 0px;
+}
+
+.button_added {
+  border-radius: 10px;
+  padding: 3px 12px;
+  font-weight: 700;
+  font-size: 10px;
+}
+
+.button_added:not(:disabled) {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+
+.button_added:disabled {
+  border-radius: 10px;
+  background-color: rgb(216, 216, 216);
+  padding: 3px 12px;
+  font-weight: 700;
+  font-size: 10px;
+  color: rgb(0, 0, 0);
+}
+
+.button_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  background-color: transparent;
+  color: white;
+}

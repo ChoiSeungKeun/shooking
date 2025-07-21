@@ -6,11 +6,13 @@ import Notfound from "./pages/Notfound";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/product" element={<Product />} />
-      <Route path="*" element={<Notfound />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="*" element={<Notfound />} />
+      </Routes>
+    </>
   );
 }
 
