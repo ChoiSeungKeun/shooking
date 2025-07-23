@@ -31,6 +31,7 @@
 .button_added:disabled {
   background-color: rgb(216, 216, 216);
   color: rgb(0, 0, 0);
+  cursor: not-allowed;
 }
 
 .button_icon {

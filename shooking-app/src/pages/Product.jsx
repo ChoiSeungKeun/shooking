@@ -1,4 +1,5 @@
 import { MdOutlineShoppingBag } from "react-icons/md";
+import mockProducts from "./../data/mockProducts";
 import Header from "./../components/Header";
 import Button from "./../components/Button";
 import ProductList from "../components/ProductList";
@@ -19,7 +20,7 @@ const Product = () => {
         }
         theme={"dark"}
       />
-      <ProductList />
+      <ProductList productList={mockProducts} />
     </div>
   );
 };
