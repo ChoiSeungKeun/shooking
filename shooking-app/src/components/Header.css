@@ -1,0 +1,40 @@
+.Header {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  max-height: 70px;
+  padding: 10px;
+}
+
+.Header > div {
+  display: flex;
+}
+
+.header_light {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+.header_dark {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+
+.header_center {
+  justify-content: flex-start;
+  width: 70%;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.header_left {
+  width: 15%;
+  justify-content: flex-start;
+}
+
+.header_right {
+  width: 15%;
+  justify-content: flex-end;
+}
