@@ -1,0 +1,41 @@
+.CardNumberInput {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.label_section > label {
+  font-size: 12px;
+  color: rgb(82, 82, 82);
+}
+
+.input_section {
+  background-color: rgb(236, 235, 241);
+  padding: 10px 0px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 7px;
+}
+
+.input_section .input_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.input_section .input_wrapper > input {
+  width: 60px;
+  background-color: rgb(236, 235, 241);
+  text-align: center;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+}
+
+.input_section .input_wrapper > span {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+}
