@@ -34,7 +34,7 @@ const CardNumberInput = () => {
     setCardNumbers(chunks);
 
     const nextFocusIndex = chunks.findIndex((chunk) => chunk.length < 4);
-    inputRefs.current[nextFocusIndex === -1 ? 3 : nextFocusIndex]?.focus();
+    indexRefs.current[nextFocusIndex === -1 ? 3 : nextFocusIndex]?.focus();
   };
 
   // TODO 3, 4번째 input 마스킹 기능 구현 필요
