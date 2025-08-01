@@ -1,0 +1,29 @@
+.LabeledInput {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.LabeledInput_full {
+  width: 100%;
+}
+
+.LabeledInput_fit {
+  display: inline-flex;
+  width: fit-content;
+}
+
+.LabeledInput .label_section > label {
+  font-size: 12px;
+  color: rgb(82, 82, 82);
+}
+
+.LabeledInput .input_section {
+  display: flex;
+  gap: 7px;
+}
+
+.LabeledInput .input_section > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
