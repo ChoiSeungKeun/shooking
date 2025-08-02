@@ -1,6 +1,7 @@
 import { useState } from "react";
 import LabeledInput from "./LabeledInput";
 import SegmentedInput from "./SegmentedInput";
+import BaseInput from "./BaseInput";
 
 export default {
   title: "Components/LabeledInput",
@@ -48,6 +49,36 @@ export const ExpiryDate = () => {
   );
 };
 
+export const OwnerName = () => {
+  const [ownerName, setOwnerName] = useState("");
+
+  return (
+    <LabeledInput label="카드 소유자 이름" fullWidth={true}>
+      <BaseInput
+        placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+        value={ownerName}
+        onChange={setOwnerName}
+      />
+    </LabeledInput>
+  );
+};
+
+export const CVCCode = () => {
+  const [code, setCode] = useState("");
+
+  return (
+    <LabeledInput label="보안 코드(CVC/CVV)" fullWidth={false}>
+      <BaseInput
+        maxLength={3}
+        inputMode="numeric"
+        value={code}
+        display="fit"
+        onChange={setCode}
+      />
+    </LabeledInput>
+  );
+};
+
 export const Password = () => {
   const [password, setPassword] = useState(["1", "2"]);
 
@@ -67,18 +98,3 @@ export const Password = () => {
     </LabeledInput>
   );
 };
-
-// export const ExpiryDate = () => {
-//   const [expiry, setExpiry] = useState(["08", "25"]);
-//   return (
-//     <LabeledInput
-//       label="만료일"
-//       inputCount={2}
-//       maxLength={2}
-//       inputMode="numeric"
-//       separator="/"
-//       values={expiry}
-//       setValues={setExpiry}
-//     />
-//   );
-// };
