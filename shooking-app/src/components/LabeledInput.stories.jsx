@@ -102,7 +102,7 @@ export const Password = () => {
         maxLength={1}
         inputMode="numeric"
         values={password}
-        varient={"square"}
+        variant={"square"}
         display="fit"
         background={"transparent"}
         maskIndices={[1, 2]}

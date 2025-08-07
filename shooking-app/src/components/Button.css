@@ -56,3 +56,21 @@
   font-size: 30px;
   background-color: transparent;
 }
+
+.button_new-card {
+  width: 330px;
+  height: 220px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 400;
+  color: rgb(87, 87, 87);
+}
+
+.button_selected-card {
+  width: 330px;
+  height: 40px;
+  background-color: rgb(255, 239, 100);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+}

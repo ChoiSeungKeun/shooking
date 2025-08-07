@@ -1,49 +1,35 @@
-import { useState } from "react";
+import Card from "./Card";
 import CardForm from "./CardForm";
 import Button from "./Button";
 
 import "./AddCardContainer.css";
 
-const AddCardContainer = () => {
-  const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
-  const [expiryDate, setExpiryDate] = useState(["", ""]);
-  const [ownerName, setOwnerName] = useState("");
-  const [code, setCode] = useState("");
-  const [password, setPassword] = useState(["", ""]);
-
-  const isComplete = () => {
-    const isCardNumbersValid = cardNumbers.every((value) => value.length === 4);
-    const isExpiryDateValid = expiryDate.every((value) => value.length === 2);
-    const isOwnerValid = ownerName.trim().length > 0;
-    const isCodeValid = code.length === 3;
-    const isPasswordValid = password.every((p) => p.length === 1);
-
-    return (
-      isCardNumbersValid &&
-      isExpiryDateValid &&
-      isOwnerValid &&
-      isCodeValid &&
-      isPasswordValid
-    );
-  };
+const AddCardContainer = ({
+  draftCard,
+  onUpdateField,
+  onSubmitCard,
+  submitting = false,
+  submitError = "",
+  validateCard,
+}) => {
+  const isValid = validateCard(draftCard);
 
   return (
     <div className="AddCardContainer">
-      <div>카드섹션</div>
-      <CardForm
-        cardNumbers={cardNumbers}
-        expiryDate={expiryDate}
-        ownerName={ownerName}
-        code={code}
-        password={password}
-        setCardNumbers={setCardNumbers}
-        setExpiryDate={setExpiryDate}
-        setOwnerName={setOwnerName}
-        setCode={setCode}
-        setPassword={setPassword}
-      />
+      <Card {...draftCard} />
 
-      {isComplete() && <Button text={"작성 완료"} variant={"form"} />}
+      <CardForm card={draftCard} onUpdateField={onUpdateField} />
+
+      {submitError && <p>{submitError}</p>}
+
+      {isValid && (
+        <Button
+          text={"작성 완료"}
+          variant={"form"}
+          onClick={onSubmitCard}
+          disabled={submitting || !isValid}
+        />
+      )}
     </div>
   );
 };

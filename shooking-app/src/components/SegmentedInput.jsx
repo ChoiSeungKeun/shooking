@@ -12,7 +12,7 @@ const SegmentedInput = ({
   separator = "",
   values,
   autoFocusIndex = null,
-  varient,
+  variant,
   display = "full",
   justify = "center",
   background,
@@ -71,7 +71,7 @@ const SegmentedInput = ({
             onFocus={() => setFocusedIndex(index)}
             onBlur={() => setFocusedIndex(null)}
             ref={(el) => (inputRefs.current[index] = el)}
-            className={`input input_${varient}`}
+            className={`input input_${variant}`}
           />
           {separator && index < inputCount - 1 && <span>{separator}</span>}
         </div>
@@ -88,7 +88,7 @@ SegmentedInput.propTypes = {
   separator: PropTypes.string,
   values: PropTypes.arrayOf(PropTypes.string).isRequired,
   autoFocusIndex: PropTypes.number,
-  varient: PropTypes.string,
+  variant: PropTypes.string,
   display: PropTypes.string,
   justify: PropTypes.string,
   background: PropTypes.string,

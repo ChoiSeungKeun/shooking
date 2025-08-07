@@ -1,0 +1,23 @@
+.CardListContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 20px;
+  gap: 20px;
+}
+
+.card_section {
+  display: flex;
+  justify-content: center;
+}
+
+.card_section > p {
+  margin: 20px 0 0 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgb(87, 87, 87);
+}
+
+.button_section {
+  display: flex;
+  justify-content: center;
+}

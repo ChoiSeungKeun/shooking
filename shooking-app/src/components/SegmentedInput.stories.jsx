@@ -14,7 +14,7 @@ export default {
     placeholder: { control: "text" },
     separator: { control: "text" },
     autoFocusIndex: { control: { type: "number" } },
-    varient: {
+    variant: {
       control: { type: "select" },
       options: ["square"],
     },
@@ -78,7 +78,7 @@ Password.args = {
   inputCount: 2,
   maxLength: 1,
   inputMode: "numeric",
-  varient: "square",
+  variant: "square",
   display: "fit",
   background: "transparent",
   maskIndices: [1, 2],

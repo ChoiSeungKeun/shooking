@@ -5,54 +5,45 @@ import InfoIcon from "./InfoIcon";
 
 import "./CardForm.css";
 
-const CardForm = ({
-  cardNumbers,
-  expiryDate,
-  ownerName,
-  code,
-  password,
-  setCardNumbers,
-  setExpiryDate,
-  setOwnerName,
-  setCode,
-  setPassword,
-}) => {
+const CardForm = ({ card, onUpdateField }) => {
+  const bind = (field) => (value) => onUpdateField(field, value);
+
   return (
     <div className="CardForm">
       <LabeledInput label="카드 번호">
         <SegmentedInput
-          inputCount={cardNumbers.length}
+          inputCount={card.cardNumbers.length}
           maxLength={4}
           inputMode="numeric"
           separator="-"
-          values={cardNumbers}
+          values={card.cardNumbers}
           maskIndices={[3, 4]}
-          onChange={setCardNumbers}
+          onChange={bind("cardNumbers")}
         />
       </LabeledInput>
 
       <LabeledInput label={"만료일"}>
         <SegmentedInput
-          inputCount={expiryDate.length}
+          inputCount={card.expiryDate.length}
           maxLength={2}
           inputMode="numeric"
           separator="/"
-          values={expiryDate}
+          values={card.expiryDate}
           display="fit"
-          onChange={setExpiryDate}
+          onChange={bind("expiryDate")}
         />
       </LabeledInput>
 
       <LabeledInput
         label="카드 소유자 이름"
-        labelSuffix={`${ownerName.length}/30`}
+        labelSuffix={`${card.ownerName.length}/30`}
       >
         <div>
           <BaseInput
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-            value={ownerName}
+            value={card.ownerName}
             align="left"
-            onChange={setOwnerName}
+            onChange={bind("ownerName")}
           />
         </div>
       </LabeledInput>
@@ -61,25 +52,25 @@ const CardForm = ({
         <BaseInput
           maxLength={3}
           inputMode="numeric"
-          value={code}
+          value={card.code}
           display="fit"
           masked={true}
-          onChange={setCode}
+          onChange={bind("code")}
         />
         <InfoIcon message="카드 뒷면의 3자리 숫자입니다." />
       </LabeledInput>
 
       <LabeledInput label={"카드 비밀번호"}>
         <SegmentedInput
-          inputCount={password.length}
+          inputCount={card.password.length}
           maxLength={1}
           inputMode="numeric"
-          values={password}
-          varient={"square"}
+          values={card.password}
+          variant={"square"}
           display="fit"
           background={"transparent"}
           maskIndices={[1, 2]}
-          onChange={setPassword}
+          onChange={bind("password")}
         />
         <div className="fake-dot"></div>
         <div className="fake-dot"></div>
