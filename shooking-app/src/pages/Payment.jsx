@@ -1,4 +1,6 @@
 import { useState, useReducer } from "react";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoCloseOutline } from "react-icons/io5";
 
 import Header from "../components/Header";
 import CardListContainer from "../components/CardListContainer";
@@ -102,7 +104,11 @@ const Payment = () => {
     <div>
       {mode === "LIST" ? (
         <div>
-          <Header title={"보유카드"} rightChild={<Button text={"X"} />} />
+          <Header
+            title={"보유카드"}
+            rightArea={<Button icon={<IoCloseOutline />} variant="icon" />}
+            theme="light"
+          />
           <CardListContainer
             cards={cards}
             selectedCardId={selectedCardId}
@@ -114,9 +120,16 @@ const Payment = () => {
       ) : (
         <div>
           <Header
-            leftChild={<Button text={"<"} onClick={cancelCardRegistration} />}
             title={"카드추가"}
-            rightChild={<Button text={"X"} />}
+            leftArea={
+              <Button
+                icon={<IoIosArrowBack />}
+                variant="icon"
+                onClick={cancelCardRegistration}
+              />
+            }
+            rightArea={<Button icon={<IoCloseOutline />} variant="icon" />}
+            theme="light"
           />
           <AddCardContainer
             draftCard={draftCard}

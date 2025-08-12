@@ -6,7 +6,7 @@ import CartNavItem from "../components/CartNavItem";
 const Product = () => {
   return (
     <div>
-      <Header rightChild={<CartNavItem />} theme={"dark"} />
+      <Header rightArea={<CartNavItem />} theme={"dark"} />
       <ProductList productList={mockProducts} />
     </div>
   );
