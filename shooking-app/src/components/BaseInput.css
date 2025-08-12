@@ -1,0 +1,49 @@
+.BaseInput {
+  background-color: rgb(236, 235, 241);
+  border-radius: 7px;
+  padding: 0px 15px;
+  box-sizing: border-box;
+}
+
+.BaseInput_display_full {
+  display: flex;
+  width: 100%;
+}
+
+.BaseInput_display_fit {
+  display: inline-flex;
+}
+
+.BaseInput .input {
+  height: 45px;
+  padding: 0px;
+  background-color: transparent;
+  align-items: center;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+}
+
+.BaseInput .input_full {
+  width: 360px;
+  min-width: 0;
+}
+
+.BaseInput .input_fit {
+  width: 110px;
+  min-width: 0;
+}
+
+.BaseInput .input_align_left {
+  text-align: left;
+}
+
+.BaseInput .input_align_center {
+  text-align: center;
+}
+
+.BaseInput .input_align_right {
+  text-align: right;
+}

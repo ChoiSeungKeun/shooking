@@ -1,0 +1,61 @@
+.SegmentedInput {
+  background-color: rgb(236, 235, 241);
+  gap: 5px;
+  border-radius: 7px;
+}
+
+.SegmentedInput_display_full {
+  display: flex;
+  width: 100%;
+}
+
+.SegmentedInput_display_fit {
+  display: inline-flex;
+}
+
+.SegmentedInput_justify_start {
+  justify-content: flex-start;
+}
+
+.SegmentedInput_justify_center {
+  justify-content: center;
+}
+
+.SegmentedInput_justify_end {
+  justify-content: flex-end;
+}
+
+.SegmentedInput_background_transparent {
+  background-color: transparent;
+}
+
+.SegmentedInput .input_wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+.SegmentedInput .input_wrapper .input {
+  width: 60px;
+  height: 43px;
+  background-color: transparent;
+  text-align: center;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+}
+
+.SegmentedInput .input_wrapper .input_square {
+  width: 45px;
+  height: 45px;
+  background-color: rgb(236, 235, 241);
+  border-radius: 7px;
+}
+
+.SegmentedInput .input_wrapper > span {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+  line-height: 18px;
+}
