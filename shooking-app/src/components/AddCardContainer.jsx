@@ -25,7 +25,7 @@ const AddCardContainer = ({
       {isValid && (
         <Button
           text={"작성 완료"}
-          variant={"form"}
+          size={"md"}
           onClick={onSubmitCard}
           disabled={submitting || !isValid}
         />
