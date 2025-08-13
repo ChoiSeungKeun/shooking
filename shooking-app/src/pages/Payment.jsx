@@ -77,11 +77,13 @@ const Payment = () => {
         return;
       }
 
-      const saved = await registerCard(draftCard);
-      dispatch({ type: CARD_ACTION.ADD, card: saved });
+      // TODO 추후 백엔드 연결 시 요청 진행
+      // const saved = await registerCard(draftCard);
+      dispatch({ type: CARD_ACTION.ADD, card: draftCard });
 
       resetDraftCard();
       setMode(PaymentMode.LIST);
+      setSelectedCardId(null);
     } catch (err) {
       setSubmitError(err.message || "카드 등록 중 오류가 발생했습니다.");
     } finally {
