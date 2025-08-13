@@ -14,11 +14,14 @@ const CardList = ({ cards, selectedCardId, onSelectCard, onSubmitPayment }) => {
             isSelected={selectedCardId === card.id}
           />
           {selectedCardId === card.id && (
-            <Button
-              text={"이 카드로 결제하기"}
-              variant={"selected-card"}
-              onClick={() => onSubmitPayment(card.id)}
-            />
+            <div className="button_wrapper">
+              <Button
+                text={"이 카드로 결제하기"}
+                variant={"payment"}
+                size={"md"}
+                onClick={() => onSubmitPayment(card.id)}
+              />
+            </div>
           )}
         </div>
       ))}
