@@ -1,4 +1,5 @@
 import React from "react";
+import { MemoryRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ProductCard from "./../components/ProductCard";
@@ -30,15 +31,17 @@ describe("ProductCard 단위 테스트", () => {
 
   const setup = (cartItems = []) => {
     render(
-      <MockCartProvider cartItems={cartItems} addToCart={mockAddToCart}>
-        <ProductCard
-          id={1}
-          imageId={1}
-          name="브랜드A"
-          description="편안하고 착용감이 좋은 신발"
-          price={35000}
-        />
-      </MockCartProvider>
+      <MemoryRouter>
+        <MockCartProvider cartItems={cartItems} addToCart={mockAddToCart}>
+          <ProductCard
+            id={1}
+            imageId={1}
+            name="브랜드A"
+            description="편안하고 착용감이 좋은 신발"
+            price={35000}
+          />
+        </MockCartProvider>
+      </MemoryRouter>
     );
   };
 
@@ -52,7 +55,7 @@ describe("ProductCard 단위 테스트", () => {
     expect(screen.getByText("브랜드A")).toBeInTheDocument();
     expect(screen.getByText("편안하고 착용감이 좋은 신발")).toBeInTheDocument();
     expect(screen.getByText("35,000원")).toBeInTheDocument();
-    expect(screen.getByRole("button")).toHaveTextContent("담기");
+    expect(screen.getByRole("button", { name: "담기" })).toBeInTheDocument();
     expect(screen.getByAltText("브랜드A")).toHaveAttribute(
       "src",
       "/mocked-image.jpg"
@@ -62,7 +65,7 @@ describe("ProductCard 단위 테스트", () => {
   test("장바구니에 없을 때 담기 버튼 클릭 시 addToCart 호출", async () => {
     setup([]);
 
-    const button = screen.getByRole("button");
+    const button = screen.getByRole("button", { name: "담기" });
     await userEvent.click(button);
 
     expect(mockAddToCart).toHaveBeenCalledWith(1, 1, "브랜드A", 35000);
@@ -71,7 +74,7 @@ describe("ProductCard 단위 테스트", () => {
   test("이미 장바구니에 있을 경우 버튼이 비활성화 및 '담김!' 텍스트 표시", () => {
     setup([{ productId: 1 }]);
 
-    const button = screen.getByRole("button");
+    const button = screen.getByRole("button", { name: "담김!" });
     expect(button).toBeDisabled();
     expect(button).toHaveTextContent("담김!");
   });
