@@ -1,14 +1,13 @@
 import { useState, useReducer } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoCloseOutline } from "react-icons/io5";
-
-import Header from "../components/Header";
-import CardListContainer from "../components/CardListContainer";
-import AddCardContainer from "../components/AddCardContainer";
-import Button from "../components/Button";
+import { usePaymentModal } from "../state/payment/usePaymentModal";
+import Header from "./Header";
+import CardListContainer from "./CardListContainer";
+import AddCardContainer from "./AddCardContainer";
+import Button from "./Button";
 
 import mockCards from "../data/mockCards";
-import { registerCard } from "./../api/cards";
 
 const CARD_ACTION = {
   ADD: "ADD_CARD",
@@ -56,6 +55,8 @@ const Payment = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+
+  const { closeModal } = usePaymentModal();
 
   const updateDraftCardField = (field, value) => {
     setDraftCard((prev) => ({ ...prev, [field]: value }));
@@ -108,7 +109,13 @@ const Payment = () => {
         <div>
           <Header
             title={"보유카드"}
-            rightArea={<Button icon={<IoCloseOutline />} variant="icon" />}
+            rightArea={
+              <Button
+                icon={<IoCloseOutline />}
+                variant="icon"
+                onClick={closeModal}
+              />
+            }
             theme="light"
           />
           <CardListContainer
@@ -130,7 +137,13 @@ const Payment = () => {
                 onClick={cancelCardRegistration}
               />
             }
-            rightArea={<Button icon={<IoCloseOutline />} variant="icon" />}
+            rightArea={
+              <Button
+                icon={<IoCloseOutline />}
+                variant="icon"
+                onClick={closeModal}
+              />
+            }
             theme="light"
           />
           <AddCardContainer

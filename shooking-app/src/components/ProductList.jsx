@@ -1,7 +1,11 @@
+import { useRecoilValue } from "recoil";
+import { productListState } from "../state/product/productListState";
 import "./ProductList.css";
 import ProductCard from "./ProductCard";
 
-const ProductList = ({ productList }) => {
+const ProductList = () => {
+  const productList = useRecoilValue(productListState);
+
   return (
     <div className="Product">
       <div className="title_bar">
