@@ -1,81 +1,69 @@
 import React from "react";
-import { MemoryRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import ProductCard from "./../components/ProductCard";
-import {
-  CartStateContext,
-  CartDispatchContext,
-} from "./../context/CartContext";
 
-jest.mock("./../util/get-shoes-image", () => ({
-  getShoesImage: jest.fn(() => "/mocked-image.jpg"),
+import ProductCard from "./../components/ProductCard";
+
+const mockAddItem = jest.fn();
+const mockOpenModal = jest.fn();
+
+jest.mock("./../state/cart/useCartActions", () => ({
+  useCartActions: () => ({
+    addItem: mockAddItem,
+  }),
 }));
 
-const MockCartProvider = ({
-  cartItems = [],
-  addToCart = jest.fn(),
-  children,
-}) => {
-  return (
-    <CartStateContext.Provider value={cartItems}>
-      <CartDispatchContext.Provider value={{ addToCart }}>
-        {children}
-      </CartDispatchContext.Provider>
-    </CartStateContext.Provider>
-  );
-};
+jest.mock("./../state/payment/usePaymentModal", () => ({
+  usePaymentModal: () => ({
+    openModal: mockOpenModal,
+  }),
+}));
 
 describe("ProductCard 단위 테스트", () => {
-  const mockAddToCart = jest.fn();
-
-  const setup = (cartItems = []) => {
-    render(
-      <MemoryRouter>
-        <MockCartProvider cartItems={cartItems} addToCart={mockAddToCart}>
-          <ProductCard
-            id={1}
-            imageId={1}
-            name="브랜드A"
-            description="편안하고 착용감이 좋은 신발"
-            price={35000}
-          />
-        </MockCartProvider>
-      </MemoryRouter>
-    );
+  const defaultProps = {
+    id: 1,
+    name: "테스트 상품 이름",
+    description: "테스트 상품 설명",
+    price: 100000,
+    imageUrl: "/test-image.jpg",
   };
 
-  afterEach(() => {
+  beforeEach(() => {
     jest.clearAllMocks();
   });
 
   test("컴포넌트 렌더링 확인", () => {
-    setup();
+    render(<ProductCard {...defaultProps} />);
 
-    expect(screen.getByText("브랜드A")).toBeInTheDocument();
-    expect(screen.getByText("편안하고 착용감이 좋은 신발")).toBeInTheDocument();
-    expect(screen.getByText("35,000원")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "담기" })).toBeInTheDocument();
-    expect(screen.getByAltText("브랜드A")).toHaveAttribute(
+    expect(screen.getByText("테스트 상품 이름")).toBeInTheDocument();
+    expect(screen.getByText("테스트 상품 설명")).toBeInTheDocument();
+    expect(screen.getByText("100,000원")).toBeInTheDocument();
+    expect(screen.getByAltText("테스트 상품 이름")).toHaveAttribute(
       "src",
-      "/mocked-image.jpg"
+      "/test-image.jpg"
     );
+    expect(screen.getByRole("button", { name: "담기" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "구매" })).toBeInTheDocument();
   });
 
-  test("장바구니에 없을 때 담기 버튼 클릭 시 addToCart 호출", async () => {
-    setup([]);
-
+  test("담기 버튼 클릭 시 장바구니에 추가하는 addItem 호출 확인.", async () => {
+    render(<ProductCard {...defaultProps} />);
     const button = screen.getByRole("button", { name: "담기" });
     await userEvent.click(button);
 
-    expect(mockAddToCart).toHaveBeenCalledWith(1, 1, "브랜드A", 35000);
+    expect(mockAddItem).toHaveBeenCalledWith({
+      id: 1,
+      name: "테스트 상품 이름",
+      price: 100000,
+      imageUrl: "/test-image.jpg",
+    });
   });
 
-  test("이미 장바구니에 있을 경우 버튼이 비활성화 및 '담김!' 텍스트 표시", () => {
-    setup([{ productId: 1 }]);
+  test("구매 버튼 클릭 시 모달이 열리는 openModal 호출 확인", async () => {
+    render(<ProductCard {...defaultProps} />);
+    const button = screen.getByRole("button", { name: "구매" });
+    await userEvent.click(button);
 
-    const button = screen.getByRole("button", { name: "담김!" });
-    expect(button).toBeDisabled();
-    expect(button).toHaveTextContent("담김!");
+    expect(mockOpenModal).toHaveBeenCalled();
   });
 });
