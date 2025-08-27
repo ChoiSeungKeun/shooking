@@ -1,57 +1,43 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import NavItem from "./../components/NavItem";
 import { MdOutlineShoppingBag } from "react-icons/md";
+
+import NavItem from "./../components/NavItem";
 
 describe("NavItem 컴포넌트 단위 테스트", () => {
   const icon = <MdOutlineShoppingBag />;
 
-  test("아이콘 렌더링 확인", () => {
+  test("아이콘, 뱃지 없을 때 렌더링", () => {
+    render(<NavItem />);
+    expect(screen.getByRole("button")).toBeInTheDocument();
+    expect(screen.queryByText("0")).not.toBeInTheDocument();
+  });
+
+  test("아이콘 있을 때 렌더링", () => {
     const { container } = render(<NavItem icon={icon} badgeContent={0} />);
-
-    const svg = container.querySelector("svg");
-    expect(svg).toBeInTheDocument();
+    expect(container.querySelector("svg")).toBeInTheDocument();
   });
 
-  test("badgeContent 0일 때 badge표시되지 않는지 확인", () => {
-    render(<NavItem icon={icon} badgeContent={0} />);
-
-    const badge = screen.queryByText("0");
-
-    expect(badge).not.toBeInTheDocument();
+  test("badgeCount 1보다 작을 때 뱃지를 표시하지 않음", () => {
+    render(<NavItem badgeContent={0} />);
+    expect(screen.queryByText("0")).not.toBeInTheDocument();
   });
 
-  test("badgeContent가 default max보다 같거나 작을 때 badgeContent 값으로 표시되는지 확인", () => {
-    const badgeContent = 99;
-    render(<NavItem icon={icon} badgeContent={badgeContent} />);
-
-    expect(screen.getByText(String(badgeContent))).toBeInTheDocument();
+  test("badgeCount 1이상이고 max 값보다 작거나 같을 때 뱃지를 표시 함", () => {
+    render(<NavItem badgeContent={9} max={9} />);
+    expect(screen.getByText("9")).toBeInTheDocument();
   });
 
-  test("badgeContent가 max보다 같거나 작을 때 badgeContent 값으로 표시되는지 확인", () => {
-    const badgeContent = 9;
-    const maxCount = 9;
-    render(<NavItem icon={icon} badgeContent={badgeContent} max={maxCount} />);
-
-    expect(screen.getByText(String(badgeContent))).toBeInTheDocument();
+  test("badgeCount max 값보다 클 때 max+ 표시", () => {
+    render(<NavItem badgeContent={15} max={9} />);
+    expect(screen.getByText("9+")).toBeInTheDocument();
   });
 
-  test("badgeContent가 max보다 클 때 `${max+}` 값으로 표시되는지 확인", () => {
-    const badgeContent = 14;
-    const maxCount = 13;
-    render(<NavItem icon={icon} badgeContent={badgeContent} max={maxCount} />);
-
-    expect(screen.getByText(`${maxCount}+`)).toBeInTheDocument();
-  });
-
-  test("클릭 시 onClick 핸들러가 실행되는지 확인", async () => {
+  test("NavItem 클릭 시 onClick 핸들러 동작 확인", async () => {
     const handleClick = jest.fn();
-    render(<NavItem icon={icon} badgeContent={1} onClick={handleClick} />);
-
-    const button = screen.getByRole("button");
-    await userEvent.click(button);
-
+    render(<NavItem onClick={handleClick} />);
+    await userEvent.click(screen.getByRole("button"));
     expect(handleClick).toHaveBeenCalled();
   });
 });

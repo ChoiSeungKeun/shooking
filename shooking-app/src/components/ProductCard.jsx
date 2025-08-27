@@ -1,34 +1,16 @@
-import { useNavigate } from "react-router-dom";
-import { useCartDispatch, useCartState } from "../context/CartContext";
-import { getShoesImage } from "./../util/get-shoes-image";
+import { useCartActions } from "../state/cart/useCartActions";
+import { usePaymentModal } from "../state/payment/usePaymentModal";
+import "./ProductCard.css";
 import Button from "./Button";
 
-import "./ProductCard.css";
-
-const ProductCard = ({ id, imageId, name, description, price }) => {
-  const cart = useCartState();
-  const { addToCart } = useCartDispatch();
-
-  const navigate = useNavigate();
-
-  const isInCart = cart.some((item) => String(item.productId) === String(id));
-
-  const handleAddToCart = () => {
-    if (isInCart) {
-      return;
-    }
-
-    addToCart(id, imageId, name, price);
-  };
-
-  const handlePurchase = () => {
-    navigate("/payment");
-  };
+const ProductCard = ({ id, name, description, price, imageUrl }) => {
+  const { addItem } = useCartActions();
+  const { openModal } = usePaymentModal();
 
   return (
     <div className="ProductCard">
       <div className="image_section">
-        <img src={getShoesImage(imageId)} alt={name} />
+        <img src={imageUrl} alt={name} />
       </div>
       <div className="info_section">
         <h4 className="name">{name}</h4>
@@ -36,17 +18,16 @@ const ProductCard = ({ id, imageId, name, description, price }) => {
         <p className="price">{price.toLocaleString("ko-KR")}원</p>
         <div className="button_section">
           <Button
-            text={isInCart ? "담김!" : "담기"}
-            variant={isInCart ? "not-allow" : "basic"}
+            text={"담기"}
+            variant={"basic"}
             size={"sm"}
-            disabled={isInCart}
-            onClick={handleAddToCart}
+            onClick={() => addItem({ id, name, price, imageUrl })}
           />
           <Button
             text={"구매"}
             variant={"payment"}
             size={"sm"}
-            onClick={handlePurchase}
+            onClick={openModal}
           />
         </div>
       </div>

@@ -5,12 +5,12 @@ import "./Button.css";
 const Button = ({ text, icon, variant = "basic", size, disabled, onClick }) => {
   return (
     <button
-      className={`Button button_${variant} button_${size}`}
+      className={`Button Button__${variant} Button__${size}`}
       onClick={onClick}
       disabled={disabled}
     >
-      {icon && <span className="icon">{icon}</span>}
-      {text && <span className="text">{text}</span>}
+      {icon && <span className="button__icon">{icon}</span>}
+      {text && <span className="button__text">{text}</span>}
     </button>
   );
 };
